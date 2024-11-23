@@ -1,4 +1,4 @@
-const usuario = {};
+let usuario = {};
 
 const factoresEmision = {
     electricidad: 0.233, // kg CO2 por kWh
@@ -70,6 +70,7 @@ const registrarDatos = () => {
 
 //Reporte de los mismos
 const resumenDatos = () => {
+
     if (usuario.electricidad > limitesYConsejos.electricidad.limite) {
         alert(limitesYConsejos.electricidad.consejo)
     }
@@ -130,7 +131,7 @@ const resumenDatos = () => {
   
   // Función para calcular las emisiones y guardarlas en el objeto usuario
   const calcularEmisiones = (datos) => {
-    usuario.emisiones = {
+    usuario = {
       electricidad: datos.electricidad * factoresEmision.electricidad,
       transportePublico: datos.transportePublico * factoresEmision.transportePublico,
       gasolina: datos.gasolina * factoresEmision.gasolina,
@@ -197,10 +198,11 @@ const menu = () => {
             registrarDatos();
             break;
         case "3":
-            if(usuario){
+            if(usuario.agua){
                 resumenDatos();
             }else{
                 alert("No has registrado ninguno de tus datos para hacerte un resumen");
+                menu();
             }
             break;
         default:
@@ -215,8 +217,6 @@ const main = () => {
   alert(
     "Bienvenido a EcoTrace: Aprende sobre el cambio climático y cómo reducir tu impacto en el medio ambiente."
   );
-  let men;
-  tpmorp = menu;
   menu();
 };
 
